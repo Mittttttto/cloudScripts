@@ -1,0 +1,105 @@
+#!/bin/sh  
+mypath=$(cd "$(dirname "$0")"; pwd)
+
+RAMDIR="/ram"
+RPRAMDIR="/rpram"
+CCSDIR="/opt/nokia/SS_RCPCCSRT"
+CCSTestDIR="/opt/nokia/SS_TestRCPCCSRT"
+
+#-----------------------------------------------------------------------------------
+# Get master and own nid
+#-----------------------------------------------------------------------------------
+if [ -s "/opt/nokia/etc/node_id/master_nid" ]
+then
+  master_nid=`cat /opt/nokia/etc/node_id/master_nid`
+  echo "read master nid from master_nid file, master nid is" $master_nid
+else
+  master_nid=0x1140
+  echo "master_nid file is not exist or empty, use default value 0x1140."
+fi
+
+if [ -s "/opt/nokia/etc/node_id/own_nid" ]
+then
+  own_nid=`cat /opt/nokia/etc/node_id/own_nid`
+  echo "read own nid from own_nid file, own nid is" $own_nid
+else
+  own_nid=0x1140
+  echo "own_nid file is not exist or empty, use default value 0x1140."
+fi
+
+export LD_LIBRARY_PATH=/lib64:/opt/nokia/lib64:/opt/nokia/lib64/RT:/opt/nokia/SS_RCPCCSRT:/opt/nokia/SS_TestRCPCCSRT:/opt/nokia/SS_TestRCPCCSRT/lib64
+export CCS_EARLY_CONFIG="$mypath/CCSEarlyConfig_up.xml"
+
+#-----------------------------------------------------------------------------------
+# Workaround for Jira RCP-20
+#-----------------------------------------------------------------------------------
+if [ ! -x "$RAMDIR" ]
+then
+    ln -s /tmp $RAMDIR
+fi
+
+#-----------------------------------------------------------------------------------
+# Look for swconfig.txt in $CCSDIR, for dev/test purpose only
+#-----------------------------------------------------------------------------------
+if [ -x "$RPRAMDIR" ] && [ ! -f "$RPRAMDIR/swconfig.txt" ] && [ -f "$CCSDIR/BB/swconfig.txt" ]
+then
+    echo "Copy swconfig.txt from SS_RCPCCRT/BB!"
+    cp $CCSDIR/BB/swconfig.txt $RPRAMDIR
+fi
+
+#----------------------------------------------------------------------------------
+#Add App info to AppDef.txt  for test purpose only
+#----------------------------------------------------------------------------------
+if [ -x "$CCSTestDIR/lib64/libCCS_SCT.so" ]
+then
+echo "CCSRTSCTDaemonExe execute SCTConfigSet.sh !!!"
+chmod 777 $mypath/SCTConfigSet.sh
+$mypath/SCTConfigSet.sh
+else
+echo "this is CCSRTDaemonExe!!!"
+fi
+
+#-----------------------------------------------------------------------------------
+# Look for AppDef.txt in $CCSDIR, for devt purpose only
+#-----------------------------------------------------------------------------------
+if [ -x "$RAMDIR" ] && [ -f "$mypath/BB/AppDef.txt" ]
+then
+    echo "Copy AppDef.txt from SS_RCPCCSRT!"
+    cp $mypath/BB/AppDef.txt $RAMDIR
+else
+    echo "Create AppDef.txt at ram!"
+    touch $RAMDIR/AppDef.txt
+fi
+
+cp $CCSDIR/SysComRoute-.xml $RAMDIR
+
+#-----------------------------------------------------------------------------------
+# Check if the CCS Daemon is already running
+#-----------------------------------------------------------------------------------
+PID=`pidof CCSRTDaemonExe`
+# if the daemon exists, exit - do not try to start a new one
+if [[ "$PID" != "" ]]
+then
+  echo "CCSRTDaemonExe already running, use ccs_up.appstop to stop it before trying to start again"
+  exit -1
+fi
+
+#-----------------------------------------------------------------------------------
+# Check if the CCS SCT Daemon is already running
+#-----------------------------------------------------------------------------------
+PID=`pidof CCSSCTDaemonExe`
+if [[ "$PID" != "" ]]
+then
+  echo "CCSSCTDaemonExe already running, use ccs_up.appstop to stop it before trying to start again"
+  exit -1
+fi
+if [ -x "$CCSTestDIR/lib64/libCCS_SCT.so" ]
+then
+echo "Starting SCT config setting ..."
+cp $CCSTestDIR/SysComRoute-.xml $RAMDIR
+echo "Starting RT CCS SCT Stub..."
+$CCSTestDIR/CCSSCTDaemonExe --startup=nid=$own_nid,testerport=15005,masternid=$master_nid,configfile=$mypath/CCSEarlyConfig_up.xml,rtconfigfile=$mypath/RTCCSConfig_up.xml &> /tmp/caseslog/CCSRT_run.txt 
+else
+echo "Starting RT CCS..."
+$mypath/CCSRTDaemonExe --startup=nid=$own_nid,testerport=15005,masternid=$master_nid,masterip=10.5.5.6,configfile=$mypath/CCSEarlyConfig_up.xml,rtconfigfile=$mypath/RTCCSConfig_up.xml
+fi

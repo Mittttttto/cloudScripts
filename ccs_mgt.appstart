@@ -1,0 +1,204 @@
+#!/bin/sh
+# ccs_mgt.appstart
+#
+# 13.07.2015/jinglu  Remove RT & Standalone related
+# 26.02.2014/rarora1 AppDef and Config files expected in /ram
+# 03.12.2013/amj030  Add testerport per app team request
+# 16.10.2013/svoona1 RT updates
+# 29.05.2013/rarora1 RT updates
+#
+
+RAMDIR="/ram"
+RPRAMDIR="/rpram"
+CCSDIR="/opt/nokia/SS_RCPCCSMCU"
+CCSTestDIR="/opt/nokia/SS_TestRCPCCSMCU"
+HWAPIDIR="/opt/hwr"
+LIBDIR="/usr/lib64"
+CASECFGDIR="/opt/nokia/SS_TestRCPCCSMCU/OAM/caseConfig"
+
+#-----------------------------------------------------------------------------------
+# Get master and own nid
+#-----------------------------------------------------------------------------------
+if [ -s "/opt/nokia/etc/node_id/master_nid" ]
+then
+  MASTER_NID=`cat /opt/nokia/etc/node_id/master_nid`
+  echo "read master nid from master_nid file, master nid is" $MASTER_NID
+else
+  MASTER_NID=0x1140
+  echo "master_nid file is not exist or empty, use default value 0x1140."
+fi
+
+if [ -s "/opt/nokia/etc/node_id/own_nid" ]
+then
+  OWN_NID=`cat /opt/nokia/etc/node_id/own_nid`
+  echo "read own nid from own_nid file, own nid is" $OWN_NID
+else
+  OWN_NID=0x1140
+  echo "own_nid file is not exist or empty, use default value 0x1140."
+fi
+
+echo "Preparing for MCU CCS startup!"
+export LD_LIBRARY_PATH="/lib64:/opt/nokia/lib64/MCU:/usr/lib64:/opt/nokia/SS_RCPCCSMCU/lib64:/opt/nokia/SS_TestRCPCCSMCU/lib64"
+
+#-----------------------------------------------------------------------------------
+# Workaround for Jira RCP-20
+#-----------------------------------------------------------------------------------
+if [ ! -x "$RAMDIR" ]
+then
+    ln -s /tmp $RAMDIR
+fi
+
+#-----------------------------------------------------------------------------------
+# Look for CCSEarlyConfig.xml in $RAMDIR and copy if LFS didn't
+#-----------------------------------------------------------------------------------
+if [ -x "$RAMDIR" ] && [ ! -f "$RAMDIR/CCSEarlyConfig.xml" ]
+then
+    echo "Copy CCSEarlyConfig.xml from SS_RCPCCSMCU!"
+    cp $CCSDIR/CCSEarlyConfig.xml $RAMDIR
+fi
+
+#-----------------------------------------------------------------------------------
+# Look for swconfig.txt in $CCSDIR/OAM, for dev purpose only
+#-----------------------------------------------------------------------------------
+if [ -x "$RPRAMDIR" ] && [ ! -f "$RPRAMDIR/swconfig.txt" ] && [ -f "$CCSDIR/OAM/swconfig.txt" ]
+then
+    echo "Copy swconfig.txt from SS_RCPCCSMCU/OAM!"
+    cp $CCSDIR/OAM/swconfig.txt $RPRAMDIR
+fi
+
+#-----------------------------------------------------------------------------------
+# Look for swconfig.txt in $CCSTestDIR/OAM, for dev/test purpose only
+#-----------------------------------------------------------------------------------
+if [ -x "$RPRAMDIR" ] && [ -f "$CCSTestDIR/OAM/swconfig.txt" ]
+then
+    echo "Replace swconfig.txt from SS_TestRCPCCSMCU/OAM!"
+    cp $CCSTestDIR/OAM/swconfig.txt $RPRAMDIR
+fi
+
+#-----------------------------------------------------------------------------------
+# Look for AppDef.txt in $CCSDIR, for devt purpose only
+#-----------------------------------------------------------------------------------
+if [ -x "$RAMDIR" ] && [ -f "$CCSDIR/OAM/AppDef.txt" ]
+then
+    echo "Copy AppDef.txt from SS_RCPCCSMCU/OAM!"
+    cp $CCSDIR/OAM/AppDef.txt $RAMDIR
+else
+    touch $RAMDIR/AppDef.txt
+fi
+
+#-----------------------------------------------------------------------------------
+# Look for AppDef.txt in $CCSDIR/OAM, for dev/test purpose only
+#-----------------------------------------------------------------------------------
+if [ -x "$RAMDIR" ] && [ -f "$CCSTestDIR/OAM/AppDef.txt" ]
+then
+    echo "Replace AppDef.txt from SS_TestRCPCCSMCU/OAM!"
+    cp $CCSTestDIR/OAM/AppDef.txt $RAMDIR
+fi
+
+#-----------------------------------------------------------------------------------
+# copy AppDefSCT.txt to $RAMDIR, for SCT purpose only
+#-----------------------------------------------------------------------------------
+if [ -x "$RAMDIR" ] && [ ! -f "$RAMDIR/AppDefSCT.txt" ] && [ -x "$CCSTestDIR/lib64/libCCS_SCT.so" ] && [ -f "$CCSTestDIR/AppDefSCT.txt" ]
+then
+    echo "Copy AppDefSCT.txt from SS_TestRCPCCSMCU!"
+    cp $CCSTestDIR/AppDefSCT.txt $RAMDIR
+fi
+
+#-----------------------------------------------------------------------------------
+# Prepare for MCU HWAPI
+#-----------------------------------------------------------------------------------
+if [ -f "$HWAPIDIR/hwr.appstart" ]
+then
+    echo "Prepare for MCU HWAPI"
+    $HWAPIDIR/hwr.appstart
+fi
+
+#----------------------------------------------------------------------------------
+#Prepare the env for AaConfigRad case test
+#----------------------------------------------------------------------------------
+if [ -f "$CASECFGDIR/AaConfigRad/envcfg/backup/prepareENV.txt" ]
+then
+    echo " copy rat_psconfig.xml to /tmp for AaConfigRad case test"
+    cp $CASECFGDIR/AaConfigRad/envcfg/cfgfiles/rat_psconfig.xml /tmp/
+fi
+
+#-----------------------------------------------------------------------------------
+# Check if the CCS Daemon is already running,if the daemon exists, exit - do not try to start a new one
+#-----------------------------------------------------------------------------------
+PID=`pidof CCSMCUDaemonExe`
+
+if [[ "$PID" != "" ]]
+then
+  echo "CCSDaemonExe already running, use ccs_mgt.appstop to stop it before trying to start again"
+  exit -1
+fi
+
+#-----------------------------------------------------------------------------------
+# Check if the CCS SCT Daemon is already running,if the sct daemon exists, exit - do not try to start a new one
+#-----------------------------------------------------------------------------------
+PID=`pidof CCSMCUSCTDaemonExe`
+
+if [[ "$PID" != "" ]]
+then
+  echo "CCSMCUSCTDaemonExe already running, use ccs_mgt.appstop to stop it before trying to start again"
+  exit -1
+fi
+
+#-----------------------------------------------------------------------------------
+# Check if the CCS SCT Application is already running,if the Application exists, exit - do not try to start a new one
+#-----------------------------------------------------------------------------------
+PID=`pidof CCSMCUSCTApplicationExe`
+
+if [[ "$PID" != "" ]]
+then
+  echo "CCSMCUSCTApplicationExe already running, use ccs_mgt.appstop to stop it before trying to start again"
+  exit -1
+fi
+
+
+#-----------------------------------------------------------------------------------
+#Normal startup
+#-----------------------------------------------------------------------------------
+#Startup nid is going to be set inside CCSDaemonExe using the nid value returned from DDAL
+#The config tag sys.default.nodeid should be set from CCSEarlyConfig.xml in case if DDAL returnes 0xFFFF
+#The default nid sys.default.nodeid should be set in CCSEarlyconfig.xml as follows:
+#<tag name="sys.default.nodeid" type="u16">0x123d</tag>
+
+cp $CCSDIR/SysComRoute-.xml $RAMDIR
+
+export CCS_EARLY_CONFIG=$CCSDIR/CCSEarlyConfig.xml
+if [ -x "$CCSTestDIR/lib64/libCCS_SCT.so" ]
+then
+echo "Starting MCU CCS SCT Stub..."
+
+#-----------------------------------------------------------------------------------
+# Copy SysComRoute-.xml to /ram
+#-----------------------------------------------------------------------------------
+cp $CCSTestDIR/SysComRoute-.xml $RAMDIR
+
+setsid $CCSTestDIR/CCSMCUSCTDaemonExe --startup=nid=$OWN_NID,masternid=$MASTER_NID,configfile=$CCS_EARLY_CONFIG,btslogport=15004,tbtscpid=0x4b7 -c "ccs.service.aasyslog.outputmode"=4,"ccs.service.aapostmortem.forcelogs"=1 > /var/log/aasyslog_simu.log
+else
+echo "Starting MCU CCS..."
+setsid $CCSDIR/CCSMCUDaemonExe --startup=nid=$OWN_NID,masternid=$MASTER_NID,configfile=$CCS_EARLY_CONFIG,btslogport=15004,tbtscpid=0x4b7 -c "ccs.service.aasyslog.outputmode"=2,"ccs.service.aapostmortem.forcelogs"=1
+fi
+
+#if [ -x "$CCSTestDIR/lib64/libCCS_SCT.so" ]
+#then
+#    if [ -x "$HWAPIDIR/HWRStartupExe" ]
+#    then
+#        setsid $CCSTestDIR/CCSMCUSCTDaemonExe --startup=configfile=$CCS_EARLY_CONFIG,executable="$HWAPIDIR/HWRStartupExe -v",testerport=15003,btslogport=15004 -c "ccs.service.aasyslog.outputmode"=2,"app.hwapi.appcfg.filename"=$RAMDIR/AppDefSCT.txt
+#    else
+#        setsid $CCSTestDIR/CCSMCUSCTDaemonExe --startup=configfile=$CCS_EARLY_CONFIG,testerport=15003,btslogport=15004 -c "ccs.service.aasyslog.outputmode"=2,"app.hwapi.appcfg.filename"=$RAMDIR/AppDefSCT.txt
+#    fi
+#else # no SCT
+#    export LIBC_FATAL_STDERR_=1
+#    if [ -x "$HWAPIDIR/HWRStartupExe" ]
+#    then
+#        setsid $CCSDIR/CCSMCUDaemonExe --startup=configfile=$CCS_EARLY_CONFIG,btslogport=15004,executable="$HWAPIDIR/HWRStartupExe -v" -c "ccs.service.aasyslog.outputmode"=2,"ccs.service.aapostmortem.forcelogs"=1,"app.hwapi.appcfg.filename"=$RAMDIR/AppDef.txt
+#    else
+#        setsid $CCSDIR/CCSMCUDaemonExe --startup=configfile=$CCS_EARLY_CONFIG,btslogport=15004 -c "ccs.service.aasyslog.outputmode"=2,"ccs.service.aapostmortem.forcelogs"=1,"app.hwapi.appcfg.filename"=$RAMDIR/AppDef.txt
+#    fi
+#fi
+
+exit 0
+

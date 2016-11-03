@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+
+<!-- /** ******************************************************************************* * @file $HeadURL: https://svne1.access.nokiasiemensnetworks.com/isource/svnroot/BTS_SC_CCS/MAINBRANCH_GCC/trunk/CCS_TestCases/tools/CcsApplication/cfg/LINUX_OCTEON2/SysComRoute-Containers.xml $ * @version $LastChangedRevision: 46972 $ * @author $Author: psprod $ * @brief Syscom configuration XML * * Copyright (c) Nokia Networks 2015. All rights reserved. *******************************************************************************/ -->
+
+-<syscom version="1.0">
+
+
+-<unit nid="0xE070" type="fct">
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom link configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- link linkId="0x31e" cpId="0x31e" harea="0" tarea="0" maxPduSize="0xffff">AaSysComGwLink</link> -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom hop configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<hop linkId="0x31e" metric="10" dest="0xffffffff">defaultViaSysComGw</hop>
+
+<!-- =============================================================== -->
+
+
+<!-- SyscomGw route configurations for CESN-1 -->
+
+
+<!-- =============================================================== -->
+
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="oamip:29211" lip="cesip:29211" rsic="0xE040ffff" lsic="0xE070ffff">CESN-OAM_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="ccpip:29211" lip="cesip:29211" rsic="0xE050ffff" lsic="0xE070ffff">CESN-CCP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="uesip:29211" lip="cesip:29211" rsic="0xE060ffff" lsic="0xE070ffff">CESN-UESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="uesip:29211" lip="cesip:29211" rsic="0xE06affff" lsic="0xE070ffff">CESN-UESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1011ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x120Dffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1231ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1232ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1233ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1234ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1241ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1242ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1243ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1244ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1251ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1252ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1253ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1254ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1261ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1262ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1263ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1264ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1271ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1272ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1273ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1274ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1281ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1282ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1283ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="cesfhip:29210" rsic="0x1284ffff" lsic="0xE070ffff">CESN-r3RAP_SCTP</route>
+
+</unit>
+
+
+-<unit nid="0xE050" type="fct">
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom link configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- link linkId="0x31e" cpId="0x31e" harea="0" tarea="0" maxPduSize="0xffff">AaSysComGwLink</link> -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom hop configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<hop linkId="0x31e" metric="10" dest="0xffffffff">defaultViaSysComGw</hop>
+
+<!-- =============================================================== -->
+
+
+<!-- SyscomGw route configurations for CCPN-1 -->
+
+
+<!-- =============================================================== -->
+
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="oamip:29211" lip="ccpip:29211" rsic="0xE040ffff" lsic="0xE050ffff">CCP-OAM_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="cesip:29211" lip="ccpip:29211" rsic="0xE070ffff" lsic="0xE050ffff">CCP-CESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="cesip:29211" lip="ccpip:29211" rsic="0xE07Affff" lsic="0xE050ffff">CCP-CESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="uesip:29211" lip="ccpip:29211" rsic="0xE060ffff" lsic="0xE050ffff">CCP-UESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="uesip:29211" lip="ccpip:29211" rsic="0xE06Affff" lsic="0xE050ffff">CCP-UESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1011ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x120Dffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1231ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1232ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1233ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1234ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1241ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1242ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1243ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1244ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1251ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1252ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1253ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1254ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1261ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1262ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1263ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1264ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1271ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1272ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1273ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1274ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1281ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1282ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1283ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="ccpfhip:29210" rsic="0x1284ffff" lsic="0xE050ffff">CCP-r3RAP_SCTP</route>
+
+</unit>
+
+
+-<unit nid="0xE040" type="fct">
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom link configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- link linkId="0x31e" cpId="0x31e" harea="0" tarea="0" maxPduSize="0xffff">AaSysComGwLink</link> -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom hop configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<hop linkId="0x31e" metric="10" dest="0xffffffff">defaultViaSysComGw</hop>
+
+<!-- =============================================================== -->
+
+
+<!-- SyscomGw route configurations for OAMN-1 -->
+
+
+<!-- =============================================================== -->
+
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="ccpip:29211" lip="oamip:29211" rsic="0xE050ffff" lsic="0xE040ffff">OAM-CCP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="cesip:29211" lip="oamip:29211" rsic="0xE070ffff" lsic="0xE040ffff">OAM-CESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="cesip:29211" lip="oamip:29211" rsic="0xE07affff" lsic="0xE040ffff">OAM-CESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="uesip:29211" lip="oamip:29211" rsic="0xE060ffff" lsic="0xE040ffff">OAM-UESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="uesip:29211" lip="oamip:29211" rsic="0xE06affff" lsic="0xE040ffff">OAM-UESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1011ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x120dffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1231ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1232ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1233ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1234ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1241ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1242ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1243ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1244ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1251ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1252ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1253ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1254ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1261ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1262ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1263ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1264ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1271ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1272ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1273ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1274ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1281ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1282ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1283ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="oamfhip:29210" rsic="0x1284ffff" lsic="0xE040ffff">OAM-r3RAP_SCTP</route>
+
+</unit>
+
+
+-<unit nid="0xE060" type="fct">
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom link configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- link linkId="0x31e" cpId="0x31e" harea="0" tarea="0" maxPduSize="0xffff">AaSysComGwLink</link> -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom hop configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<hop linkId="0x31e" metric="10" dest="0xffffffff">defaultViaSysComGw</hop>
+
+<!-- =============================================================== -->
+
+
+<!-- SyscomGw route configurations for UESN-1 -->
+
+
+<!-- =============================================================== -->
+
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="oamip:29211" lip="uesip:29211" rsic="0xE040ffff" lsic="0xE060ffff">UESN-OAM_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="ccpip:29211" lip="uesip:29211" rsic="0xE050ffff" lsic="0xE060ffff">UESN-CCP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="cesip:29211" lip="uesip:29211" rsic="0xE070ffff" lsic="0xE060ffff">UESN-CESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="cesip:29211" lip="uesip:29211" rsic="0xE07affff" lsic="0xE060ffff">UESN-CESN_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1011ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x120Dffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1231ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1232ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1233ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1234ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1241ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1242ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1243ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1244ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1251ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1252ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1253ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1254ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1261ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1262ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1263ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1264ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1271ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1272ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1273ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1274ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1281ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1282ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1283ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="rapip:29210" lip="uesfhip:29210" rsic="0x1284ffff" lsic="0xE060ffff">UESN-r3RAP_SCTP</route>
+
+</unit>
+
+
+-<unit nid="0x123d" type="fct">
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom link configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- link linkId="0x31e" cpId="0x31e" harea="0" tarea="0" maxPduSize="0xffff">AaSysComGwLink</link> -->
+
+
+<!-- =============================================================== -->
+
+
+<!-- Syscom hop configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<hop linkId="0x31e" metric="10" dest="0xffffffff">defaultViaSysComGw</hop>
+
+<!-- =============================================================== -->
+
+
+<!-- SyscomGw route configurations -->
+
+
+<!-- =============================================================== -->
+
+
+<route rel="1" msgid="0" retain="1" proto="4" rip="192.168.255.101:14009" lip="192.168.255.129:14010" rsic="0x1011ffff" lsic="0x123dffff">0x123d-0x1011</route>
+
+</unit>
+
+</syscom>
