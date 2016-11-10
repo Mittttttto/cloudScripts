@@ -116,8 +116,8 @@ t = paramiko.Transport((oamip,22))
 t.connect(username = "_rcpadmin", password = "RCP_owner")       
 sftp=paramiko.SFTPClient.from_transport(t)
 sftp.put("SysComRoute-.xml", "/opt/nokia/SS_RCPCCSMCU/SysComRoute-.xml")
-sftp.put("ccs_mgt.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_mgt.appstart")
-sftp.put("ccs_cp.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_cp.appstart")
+#sftp.put("ccs_mgt.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_mgt.appstart")
+#sftp.put("ccs_cp.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_cp.appstart")
 t.close
 
 
@@ -125,24 +125,24 @@ t = paramiko.Transport((ccpip,22))
 t.connect(username = "_rcpadmin", password = "RCP_owner")       
 sftp=paramiko.SFTPClient.from_transport(t)
 sftp.put("SysComRoute-.xml", "/opt/nokia/SS_RCPCCSMCU/SysComRoute-.xml")
-sftp.put("ccs_mgt.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_mgt.appstart")
-sftp.put("ccs_cp.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_cp.appstart")
+#sftp.put("ccs_mgt.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_mgt.appstart")
+#sftp.put("ccs_cp.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_cp.appstart")
 t.close
 
 t = paramiko.Transport((cesip,22))
 t.connect(username = "_rcpadmin", password = "RCP_owner")       
 sftp=paramiko.SFTPClient.from_transport(t)
 sftp.put("SysComRoute-.xml", "/opt/nokia/SS_RCPCCSRT/SysComRoute-.xml")
-sftp.put("ccs_mix.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_mix.appstart")
-sftp.put("ccs_up.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_up.appstart")
+#sftp.put("ccs_mix.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_mix.appstart")
+#sftp.put("ccs_up.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_up.appstart")
 t.close
 
 t = paramiko.Transport((uesip,22))
 t.connect(username = "_rcpadmin", password = "RCP_owner")       
 sftp=paramiko.SFTPClient.from_transport(t)
 sftp.put("SysComRoute-.xml", "/opt/nokia/SS_RCPCCSRT/SysComRoute-.xml")
-sftp.put("ccs_mix.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_mix.appstart")
-sftp.put("ccs_up.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_up.appstart")
+#sftp.put("ccs_mix.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_mix.appstart")
+#sftp.put("ccs_up.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_up.appstart")
 t.close
 
 ###########################################################################################
