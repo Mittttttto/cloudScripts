@@ -12,16 +12,21 @@ def trs_file(vmip,file,dir):
     sftp.put(file, dir)
 
 def reboot_vms(oamip, ccpip, cesip, uesip):
-    vms=[]
-    vms.append(ccpip)
-    vms.append(cesip)
-    vms.append(uesip)
-    vms.append(oamip)
-    for vm in vms:
-        ssh = paramiko.SSHClient()  
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())  
-        ssh.connect(vm,22,"_rcpadmin", "RCP_owner")
-        stdin, stdout, stderr = ssh.exec_command("reboot")    
+    ssh = paramiko.SSHClient()  
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())  
+    ssh.connect(oamip,22,"_rcpadmin", "RCP_owner")
+    stdin, stdout, stderr = ssh.exec_command("fshascli -rn /")  
+    
+    # vms=[]
+    # vms.append(ccpip)
+    # vms.append(cesip)
+    # vms.append(uesip)
+    # vms.append(oamip)
+    # for vm in vms:
+    #     ssh = paramiko.SSHClient()  
+    #     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())  
+    #     ssh.connect(vm,22,"_rcpadmin", "RCP_owner")
+    #     stdin, stdout, stderr = ssh.exec_command("reboot")    
 
 
 def regular_find(pattern_text,search_text):
@@ -41,7 +46,7 @@ def get_fhip(vmip):
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())  
     ssh.connect(vmip,22,"_rcpadmin", "RCP_owner")
     stdin, stdout, stderr = ssh.exec_command("ifconfig fronthaul")
-    fhip=regular_find("10.5.5.\d+", stdout.readlines())
+    fhip=regular_find("\d+.\d+.\d+.\d+", stdout.readlines())
     ssh.close
     return fhip
 
@@ -116,8 +121,8 @@ t = paramiko.Transport((oamip,22))
 t.connect(username = "_rcpadmin", password = "RCP_owner")       
 sftp=paramiko.SFTPClient.from_transport(t)
 sftp.put("SysComRoute-.xml", "/opt/nokia/SS_RCPCCSMCU/SysComRoute-.xml")
-#sftp.put("ccs_mgt.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_mgt.appstart")
-#sftp.put("ccs_cp.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_cp.appstart")
+sftp.put("ccs_mgt.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_mgt.appstart")
+sftp.put("ccs_cp.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_cp.appstart")
 t.close
 
 
@@ -125,24 +130,24 @@ t = paramiko.Transport((ccpip,22))
 t.connect(username = "_rcpadmin", password = "RCP_owner")       
 sftp=paramiko.SFTPClient.from_transport(t)
 sftp.put("SysComRoute-.xml", "/opt/nokia/SS_RCPCCSMCU/SysComRoute-.xml")
-#sftp.put("ccs_mgt.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_mgt.appstart")
-#sftp.put("ccs_cp.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_cp.appstart")
+sftp.put("ccs_mgt.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_mgt.appstart")
+sftp.put("ccs_cp.appstart", "/opt/nokia/SS_RCPCCSMCU/ccs_cp.appstart")
 t.close
 
 t = paramiko.Transport((cesip,22))
 t.connect(username = "_rcpadmin", password = "RCP_owner")       
 sftp=paramiko.SFTPClient.from_transport(t)
 sftp.put("SysComRoute-.xml", "/opt/nokia/SS_RCPCCSRT/SysComRoute-.xml")
-#sftp.put("ccs_mix.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_mix.appstart")
-#sftp.put("ccs_up.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_up.appstart")
+sftp.put("ccs_mix.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_mix.appstart")
+sftp.put("ccs_up.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_up.appstart")
 t.close
 
 t = paramiko.Transport((uesip,22))
 t.connect(username = "_rcpadmin", password = "RCP_owner")       
 sftp=paramiko.SFTPClient.from_transport(t)
 sftp.put("SysComRoute-.xml", "/opt/nokia/SS_RCPCCSRT/SysComRoute-.xml")
-#sftp.put("ccs_mix.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_mix.appstart")
-#sftp.put("ccs_up.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_up.appstart")
+sftp.put("ccs_mix.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_mix.appstart")
+sftp.put("ccs_up.appstart", "/opt/nokia/SS_RCPCCSRT/ccs_up.appstart")
 t.close
 
 ###########################################################################################
